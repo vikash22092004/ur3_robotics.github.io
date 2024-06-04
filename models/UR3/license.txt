@@ -1,0 +1,11 @@
+Model Information:
+* title:	Universal Robots UR3 Animated Cobot
+* source:	https://sketchfab.com/3d-models/universal-robots-ur3-animated-cobot-31968bd4ec5943f785cdf028facfba5c
+* author:	kerwink (https://sketchfab.com/kerwink)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Universal Robots UR3 Animated Cobot" (https://sketchfab.com/3d-models/universal-robots-ur3-animated-cobot-31968bd4ec5943f785cdf028facfba5c) by kerwink (https://sketchfab.com/kerwink) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

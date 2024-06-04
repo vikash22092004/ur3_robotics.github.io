@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Arm Simulation</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header><h1>Robotic Arm Simulation</h1></header>
+    <a href="index.html" class="button">Home</a>
+    <div class="main-container">
+        <div id="container3D"></div>
+        <div class="right-panel">
+            <div class="slider-container">
+                <h2>Joint Controls:</h2>
+                <label for="joint1-slider">Base Rotation</label>
+                <input type="range" id="joint1-slider" min="-2.14" max="2.14" step="0.01" value="0">
+                <label for="joint2-slider">Shoulder Rotation</label>
+                <input type="range" id="joint2-slider" min="-1.00" max="2.14" step="0.01" value="0">
+                <label for="joint3-slider">Wrist 1 Rotation</label>
+                <input type="range" id="joint3-slider" min="-2.14" max="3.14" step="0.01" value="0">
+                <label for="joint4-slider">Wrist 2 Rotation</label>
+                <input type="range" id="joint4-slider" min="-2.14" max="3.14" step="0.01" value="0">
+                <label for="joint5-slider">Wrist 3 Rotation</label>
+                <input type="range" id="joint5-slider" min="-3.14" max="3.14" step="0.01" value="0">
+            </div>
+            <section id="forward-kinematics">
+                <h2>Forward Kinematics</h2>
+                <div class="result-container" id="result-container">
+                    <!-- Forward kinematics results will be displayed here -->
+                </div>
+            </section>
+            <section id="transformation-matrix">
+                <h2>Transformation Matrix</h2>
+                <div id="matrix-container" class="matrix-container">
+                    <!-- Transformation matrix will be displayed here -->
+                </div>
+            </section>
+        </div>
+        <div class="down-panel">
+            <section id="inverse-kinematics">
+                <h2>Inverse Kinematics</h2>
+                <input type="number" id="target-x" placeholder="Target X" step="0.01"><br>
+                <input type="number" id="target-y" placeholder="Target Y" step="0.01"><br>
+                <input type="number" id="target-z" placeholder="Target Z" step="0.01"><br>
+                <button id="calculate-ik">Calculate Inverse Kinematics</button>
+            </section>
+            <div id="inverse-result">
+                <!-- Inverse kinematics results will be displayed here -->
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

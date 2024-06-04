@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR3 Robot Quiz</title>
+    <link rel="stylesheet" href="css/quiz.css">
+    <a href="index.html" class="button">Home</a>
+</head>
+<body>
+    <div class="container">
+        <h1>UR3 Robot Quiz</h1>
+        <form id="quiz-form">
+            <div class="question">
+                <p>1. What is the maximum payload capacity of UR3 robot arm?</p>
+                <input type="radio" name="q1" value="a"> a) 1 kg<br>
+                <input type="radio" name="q1" value="b"> b) 3 kg<br>
+                <input type="radio" name="q1" value="c"> c) 5 kg<br>
+            </div>
+            <div class="question">
+                <p>2. How many degrees of freedom (DOF) does UR3 robot arm have?</p>
+                <input type="radio" name="q2" value="a"> a) 3<br>
+                <input type="radio" name="q2" value="b"> b) 5<br>
+                <input type="radio" name="q2" value="c"> c) 6<br>
+            </div>
+            <div class="question">
+                <p>3. Which company manufactures UR3 robot arm?</p>
+                <input type="radio" name="q3" value="a"> a) ABB<br>
+                <input type="radio" name="q3" value="b"> b) Universal Robots<br>
+                <input type="radio" name="q3" value="c"> c) Fanuc<br>
+            </div>
+            <div class="question">
+                <p>4. What is the reach radius of UR3 robot arm?</p>
+                <input type="radio" name="q4" value="a"> a) 200 mm<br>
+                <input type="radio" name="q4" value="b"> b) 500 mm<br>
+                <input type="radio" name="q4" value="c"> c) 1000 mm<br>
+            </div>
+            <div class="question">
+                <p>5. Which programming language is commonly used to program UR3 robot arm?</p>
+                <input type="radio" name="q5" value="a"> a) Python<br>
+                <input type="radio" name="q5" value="b"> b) Java<br>
+                <input type="radio" name="q5" value="c"> c) C++<br>
+            </div>
+            <div class="question">
+                <p>6. What type of sensors are commonly used in UR3 robot arm for collision detection?</p>
+                <input type="radio" name="q6" value="a"> a) Infrared sensors<br>
+                <input type="radio" name="q6" value="b"> b) Force torque sensors<br>
+                <input type="radio" name="q6" value="c"> c) Ultrasonic sensors<br>
+            </div>
+            <input type="submit" value="Submit Quiz">
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("quiz-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // Correct answers
+            const answers = ["b", "c", "b", "b", "a", "b"];
+            let marks = 0;
+            let totalQuestions = answers.length;
+            let answeredQuestions = 0;
+            const formData = new FormData(this);
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "";
+            
+            // Check if all questions are answered
+            formData.forEach((value, key) => {
+                answeredQuestions++;
+            });
+
+            if (answeredQuestions < totalQuestions) {
+                alert("Please answer all the questions before submitting.");
+                return;
+            }
+
+            // Check answers and display results
+            formData.forEach((value, key) => {
+                const questionIndex = key.substring(1) - 1;
+                const correctAnswer = answers[questionIndex];
+                const questionDiv = document.getElementsByClassName("question")[questionIndex];
+                
+                if (value === correctAnswer) {
+                    marks++;
+                    questionDiv.innerHTML += `<div class='correct-answer'>Correct!</div>`;
+                } else {
+                    questionDiv.innerHTML += `<div class='incorrect-answer'>Incorrect! Correct answer: ${correctAnswer.toUpperCase()}</div>`;
+                }
+            });
+
+            // Display marks
+            resultDiv.innerHTML = "<div class='result-box'>Marks obtained: " + marks + " out of " + totalQuestions + "</div>";
+        });
+    </script>
+</body>
+</html>

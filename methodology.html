@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR3 Robot Arm Manipulator</title>
+    <link rel="stylesheet" href="css/stylemeth.css">
+    <a href="index.html" class="button">Home</a>
+</head>
+
+<body>
+    <div class="container1">
+        <h1>Applying Kinematics</h1>
+        <h2>What is Kinematics?</h2>
+        <p>Kinematics is a branch of classical mechanics that describes the motion of objects without considering the
+            forces that cause the motion. Kinematics allows us to analyze and predict the motion of objects by studying
+            their trajectories, speeds, and accelerations without necessarily delving into the underlying causes of that
+            motion. It forms the foundation of many areas of physics, including robotics, aerospace engineering, and
+            biomechanics.</p>
+    </div>
+
+    <div class="container2">
+        <h2>Forward Kinematics</h2>
+        <p>Forward kinematics is a method used in robotics and computer graphics to determine the position and
+            orientation of the end-effector (such as a robot's hand or tool) based on the known values of joint
+            parameters, such as joint angles or lengths. In simpler terms, forward kinematics allows you to calculate
+            where the end of a robot arm or any mechanical system will be located based on the positions of its
+            individual segments or joints. It's like tracing the path of movement from the base of the system to the
+            end.</p>
+
+        <h2>Applying Forward Kinematics</h2>
+        <p>Calculating forward kinematics using the Denavit-Hartenberg (DH) parameter table involves a systematic
+            approach to model the joint parameters of a robotic manipulator. The DH parameters provide a standardized
+            way to represent the kinematic chain of the robot. Here's a step-by-step guide to understanding and
+            calculating forward kinematics using DH parameters:</p>
+
+        <ol>
+            <li><strong>Denavit-Hartenberg Parameters:</strong>
+                <ul>
+                    <li>θi (theta): Joint angle — the angle around the Zi-1 axis from the Xi-1 axis to the Xi axis.</li>
+                    <li>di (link offset): Distance along the Zi-1 axis from the origin of frame i-1 to the Xi axis.</li>
+                    <li>ai (link length): Distance along the Xi axis from the Zi-1 axis to the Zi axis.</li>
+                    <li>αi (link twist): Angle around the Xi axis from the Zi-1 axis to the Zi axis.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <img src="images/transformationmatrix.png" alt="Transformation Matrix" class="medium-img">
+        <figcaption>Fig(1.1) Transformation Matrix</figcaption>
+        <p>A commonly used convention for selecting frames of reference in robotic applications is the
+            Denavit-Hartenberg, or D-H convention. In this convention, each homogeneous transformation Ai is represented
+            as a product of four basic transformations.</p>
+
+        <img src="images/ur3.jpg" alt="UR3 Robotic Arm Manipulator" class="small-img">
+        <figcaption>Fig(1.2) UR3 Robotic Arm Manipulator</figcaption>
+        <img src="images/ur3measure.png" alt="Measurements of UR3" class="medium-img">
+        <figcaption>Fig(1.3) Measurements of UR3</figcaption>
+    </div>
+
+    <div id="dh-parameters">
+        <h3>DH Parameters of UR3 Robot</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Link</th>
+                    <th>Alpha (°)</th>
+                    <th>A (m)</th>
+                    <th>D (m)</th>
+                    <th>Theta (°)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>90</td>
+                    <td>0</td>
+                    <td>0.1519</td>
+                    <td>θ1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>-0.24365</td>
+                    <td>0</td>
+                    <td>θ2</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>-0.21325</td>
+                    <td>0</td>
+                    <td>θ3</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>90</td>
+                    <td>0</td>
+                    <td>0.11235</td>
+                    <td>θ4</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>-90</td>
+                    <td>0</td>
+                    <td>0.08535</td>
+                    <td>θ5</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0.0819</td>
+                    <td>θ6</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container2">
+        <h2>Steps to Calculate Forward Kinematics</h2>
+        <p><strong>1. Define the DH Parameters:</strong><br>
+            The Denavit-Hartenberg (DH) parameters uniquely define each joint's configuration in the robot. For the UR3
+            robot, we have six joints, and the DH parameters for each joint include four values: θi, di, ai, and αi.
+            These
+            parameters describe the position and orientation of one joint relative to the previous one.</p>
+
+        <p><strong>2. Construct Individual Transformation Matrices:</strong><br>
+            For each joint, we construct a transformation matrix Ai using the DH parameters. This matrix transforms
+            coordinates from the frame of joint i-1 to the frame of joint i. The transformation matrix Ai is built using
+            trigonometric functions of θi (the joint angle), and the other parameters di (link offset), ai (link
+            length),
+            and αi (link twist).</p>
+
+        <p><strong>3. Multiply the Transformation Matrices:</strong><br>
+            To find the position and orientation of the end-effector (the tool or gripper at the end of the robot arm),
+            we
+            need to combine the transformations from each joint. This is done by multiplying the individual
+            transformation
+            matrices in sequence:<br>
+            T = A1 • A2 • A3 • A4 • A5 • A6<br>
+            Here, T is the overall transformation matrix that describes the position and orientation of the end-effector
+            relative to the base frame of the robot.</p>
+
+        <p><strong>4. Interpretation of the Final Transformation Matrix:</strong><br>
+            The final transformation matrix T will be a 4x4 matrix containing:<br>
+            • The rotational part (the top-left 3x3 submatrix) which describes the orientation of the end-effector.<br>
+            • The translational part (the top-right 3x1 vector) which describes the position of the end-effector in 3D
+            space.</p>
+    </div>
+
+    <div class="container2">
+        <h2>Inverse Kinematics</h2>
+        <p>Inverse kinematics is a technique used in robotics and animation where you start with a desired end position
+            (like where you want a robot arm's hand to be) and work backward to figure out the joint angles or positions
+            needed to achieve that desired end position. It's like solving a puzzle in reverse, finding out how to move
+            the different parts of
+            a system to get to a specific final arrangement.</p>
+
+        <h2>Algorithm used to calculate Inverse Kinematics</h2>
+        <h3>CCD (Cyclic Coordinate Descent):</h3>
+        <p>CCD algorithm iteratively adjusts each joint angle in a chain of joints to minimize the difference between
+            the current end-effector position and the desired position.</p>
+
+        <h3>Key Concepts of CCD:</h3>
+        <ul>
+            <li><strong>Iterative Optimization:</strong> CCD adjusts one joint at a time in an iterative manner to
+                minimize the distance between the current end-effector position and the desired target position.</li>
+            <li><strong>Sequential Update:</strong> The algorithm updates each joint angle sequentially. After adjusting
+                all joints once, the algorithm starts over from the first joint and repeats the process.</li>
+            <li><strong>Simple and Efficient:</strong> CCD is relatively simple to implement and computationally
+                efficient, making it suitable for real-time applications.</li>
+        </ul>
+
+        <h3>Steps in the CCD Algorithm:</h3>
+        <ol>
+            <li><strong>Initialize:</strong> Start with an initial guess for the joint angles. This could be the current
+                configuration of the robot.</li>
+            <li><strong>Iterate Over Joints:</strong> For each joint, starting from the end-effector and moving towards
+                the base:
+                <ul>
+                    <li><strong>Compute the Vector to Target:</strong> Calculate the vector from the current joint
+                        position to the target position.</li>
+                    <li><strong>Compute the Vector to End-Effector:</strong> Calculate the vector from the current joint
+                        position to the end-effector position.</li>
+                    <li><strong>Calculate the Rotation:</strong> Determine the rotation needed to align the end-effector
+                        vector with the target vector.</li>
+                    <li><strong>Update Joint Angle:</strong> Adjust the joint angle by the calculated rotation.</li>
+                </ul>
+            </li>
+            <li><strong>Repeat:</strong> Repeat the iterative process until the end-effector is sufficiently close to
+                the target position or a maximum number of iterations is reached.</li>
+        </ol>
+    </div>
+</body>
+
+</html>

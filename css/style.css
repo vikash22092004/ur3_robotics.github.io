@@ -1,24 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+*{
+    font-family: 'Poppins';
+    font-family: Ubuntu,sans-serif;
+}
+
 body {
-  margin: 0;
-  font-family: "Montserrat", sans-serif;
-  background-color: #000;
-}
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #c3fcff;
+  }
+  
+  header {
+    background-color: #1c1d1e;
+    color: #fbfbfb;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .main-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+  
+  #container3D {
+    width: 60%;
+    height: 500px; /* Reduced height */
+    background-color: #5f5f5f92;
+    border: 1px solid #000000;
+    border-radius: 5%;
+  }
+  
+  .right-panel {
+    display: flex;
+    flex-direction: column;
+    width: 60vh;
+  }
+  
+  .slider-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .slider-container label,
+  .slider-container input {
+    margin-bottom: 10px;
+  }
+  
+  .slider-container input[type="range"] {
+    width: 35%; /* Reduced width */
+  }
+  
+  #forward-kinematics{
+    translate: 0px -30px;
+    margin-top: 20px;
+  }
+  #transformation-matrix {
+    translate: 0px -50px;
+    margin-top: 20px;
+  }
+  
+  .result-container{
+    background-color: #f0f0f0;
+    width: 50%;
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+  #matrix-container {
+    background-color: #f0f0f0;
+    width: 50%;
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
 
-header {
-  margin-top: 3em;
-  text-align: center;
-  color: white;
-}
-
-header h1 {
-  font-size: 2em;
-  font-weight: 900;
-}
-
-#container3D canvas {
-  width: 100vw !important;
-  height: 100vh !important;
+  .matrix-container table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #000; /* Add border to the table */
+  }
+  
+  .matrix-container th,
+  .matrix-container td {
+    border: 1px solid #000; /* Add border to table cells */
+    padding: 8px; /* Add padding to table cells */
+    text-align: center; /* Center-align content in table cells */
+  }
+  
+  .matrix-container th {
+    background-color: #f0f0f0; /* Background color for table header cells */
+  }
+  
+  /* Added button styles */
+.button {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #5c5c5c;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
 }
+
+.button:hover {
+  background-color: #000000;
+  color: #ffffff;
+  text-decoration: none;
+}
+  
+  .down-panel {
+    display: flex;
+    gap: 10vh;
+    width: 60%;
+    margin-top: -20px;
+  }
+  
+  #inverse-kinematics {
+    translate: 0px -30px;
+    display: block;
+    padding: 20px;
+    width: 30%;
+  }
+  
+  #inverse-kinematics input {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  #inverse-kinematics button {
+    padding: 10px;
+    cursor: pointer;
+    color: #f0f0f0;
+    background-color: #1c1d1e;
+    width: 100%;
+  }
+  
+  
